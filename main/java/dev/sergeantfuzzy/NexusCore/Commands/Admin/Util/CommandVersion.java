@@ -11,8 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class CommandVersion {
     private static final MiniMessage MM = MiniMessage.miniMessage();
     private static final String DISCORD_URL = "https://discord.com/users/193943556459724800";
-    private static final String SPIGOT_URL  = "https://www.spigotmc.org/resources/";
-    private static final String BBB_URL     = "https://builtbybit.com/resources/";
+    private static final String SPIGOT_URL  = "https://www.spigotmc.org/resources/nexuscore-%E2%9C%A8-the-all-in-one-server-core.129669/";
+    private static final String BBB_URL     = "https://builtbybit.com/resources/nexuscore.80896/";
     private final JavaPlugin plugin;
     public CommandVersion(JavaPlugin plugin) {
         this.plugin = plugin;

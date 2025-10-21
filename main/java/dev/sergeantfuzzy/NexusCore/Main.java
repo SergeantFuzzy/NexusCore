@@ -11,13 +11,16 @@ import dev.sergeantfuzzy.NexusCore.Utilities.Msg;
 public final class Main extends JavaPlugin {
     private UpdateBootstrap updates;
     public UpdateBootstrap getUpdates() { return this.updates; }
+    private static final int SPIGOT_ID = 129669;
+    private static final String BBB_URL   = "https://builtbybit.com/resources/nexuscore.80896/";
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         Msg.printBanner(this, "BOOTED ✔️");
-        updates = UpdateBootstrap.enable(this, new UpdateChecker(this, /*spigotId*/ 129311, /*bbbUrl*/ null));
-        getServer().getPluginManager().registerEvents(new AdminJoinListener(this, 129311, "https://builtbybit.com/resources/your-resource-slug-or-id/"), this);
+        UpdateChecker checker = new UpdateChecker(this, SPIGOT_ID, BBB_URL);
+        updates = UpdateBootstrap.enable(this, checker);
+        getServer().getPluginManager().registerEvents(new AdminJoinListener(this, SPIGOT_ID, BBB_URL), this);
         getServer().getPluginManager().registerEvents(new LeaveListener(), this);
         CommandRegistrar.register(this);
     }
