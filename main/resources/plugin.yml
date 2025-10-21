@@ -1,0 +1,95 @@
+name: NexusCore
+main: dev.sergeantfuzzy.NexusCore.Main
+version: ${project.version}
+api-version: '1.21'
+load: POSTWORLD
+authors:
+  - SergeantFuzzy
+description: Core framework plugin powering NexusCore features — provides commands, GUI menus, and utilities for managing server systems and modules.
+
+commands:
+  nexus:
+    description: NexusCore administration root command
+    usage: /nexus [reload|version]
+    aliases: [nc, ncore, nexuscore]
+  feed:
+    description: Feed yourself or another player. Use /feed status or /feed <player>.
+    usage: /feed [status|<player>]
+    aliases: [food, hunger]
+    permission: nexuscore.feed
+  heal:
+    description: Heal yourself or another player.
+    usage: /heal [<player>]
+    permission: nexuscore.heal
+  health:
+    description: View health for yourself or others. Use /health status [player].
+    usage: /health [status] [player]
+    permission: nexuscore.health
+  fly:
+    description: Toggle or set flight. /fly [on|off] [player], /fly status [player]
+    usage: /fly [on|off] [player]|status [player]
+    permission: nexuscore.fly
+  jump:
+    description: Jump to the block you are looking at or make another player jump.
+    usage: /jump [player]
+    permission: nexuscore.jump
+  randomtp:
+    description: Randomly teleport to a safe location (or teleport another player).
+    usage: /randomtp [player]
+    aliases: [rtp]
+    permission: nexuscore.randomtp
+
+permissions:
+  nexuscore.*:
+    description: Grants access to all NexusCore commands and features.
+    default: op
+    children:
+      nexuscore.admin.*: true
+      nexuscore.update.notify: true
+  nexuscore.admin.*:
+    description: Grants access to all NexusCore admin commands.
+    default: op
+    children:
+      nexuscore.admin.reload: true
+      nexuscore.version: true
+      # Essentials admin (others) permissions
+      nexuscore.feed.others: true
+      nexuscore.heal.others: true
+      nexuscore.health.others: true
+      nexuscore.fly.others: true
+      nexuscore.jump.others: true
+      nexuscore.randomtp.others: true
+  nexuscore.admin.reload:
+    description: Allows use of /nexusreload.
+    default: op
+  nexuscore.update.notify:
+    description: Receive in-game update notifications on join.
+    default: op
+
+  # Self permissions
+  nexuscore.feed:
+    default: true
+  nexuscore.heal:
+    default: true
+  nexuscore.health:
+    default: true
+  nexuscore.fly:
+    default: true
+  nexuscore.jump:
+    default: true
+  nexuscore.randomtp:
+    default: true
+
+  # Others (admin) sub-perms
+  nexuscore.feed.others:
+    default: op
+  nexuscore.heal.others:
+    default: op
+  nexuscore.health.others:
+    default: op
+  nexuscore.fly.others:
+    default: op
+  nexuscore.jump.others:
+    default: op
+  nexuscore.randomtp.others:
+    default: op
