@@ -3,6 +3,7 @@ package dev.sergeantfuzzy.NexusCore;
 import dev.sergeantfuzzy.NexusCore.Commands.CommandRegistrar;
 import dev.sergeantfuzzy.NexusCore.Listeners.AdminJoinListener;
 import dev.sergeantfuzzy.NexusCore.Listeners.LeaveListener;
+import dev.sergeantfuzzy.NexusCore.System.Systems;
 import dev.sergeantfuzzy.NexusCore.Utilities.UpdateBootstrap;
 import dev.sergeantfuzzy.NexusCore.Utilities.UpdateChecker;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,6 +24,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new AdminJoinListener(this, SPIGOT_ID, BBB_URL), this);
         getServer().getPluginManager().registerEvents(new LeaveListener(), this);
         CommandRegistrar.register(this);
+        Systems.loadEnabledFeatures();
     }
     @Override
     public void onDisable() {

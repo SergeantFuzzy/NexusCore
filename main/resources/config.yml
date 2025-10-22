@@ -1,2 +1,22 @@
-# Globally enable/disable update checks
+# ─────────────────────────────────────────────────────────
+# NexusCore — Core Settings
+# Toggle major systems and helpers. Changes usually apply
+# on reload (/nexus reload) or player rejoin where noted.
+# ─────────────────────────────────────────────────────────
+# Globally enable/disable update checks against Spigot/BBB/GitHub.
+# If false, NexusCore will skip version lookups and update banners.
 Update Check: true
+# Place the Guide Book in a player's hand on first join (or when missing).
+# Prevents duplicates; NexusCore tags the book internally.
+GuideBook: true
+# System feature toggles (per-player UI)
+System:
+  #    Sidebar scoreboard (right side)
+  #    - Shows when a player joins if enabled
+  #    - Layout, colors, timezone, separators configurable in `Scoreboard.yml`
+  #    - Disable to prevent sidebar from being displayed at all
+  Scoreboard: true
+  #    Enhanced tab list (shown while holding TAB)
+  #    - Applies formatted header/footer and player name decorations (if implemented)
+  #    - Disable to keep the default vanilla/MOTD tablist
+  Tablist: true

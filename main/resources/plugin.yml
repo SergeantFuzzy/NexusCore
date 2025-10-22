@@ -38,6 +38,15 @@ commands:
     usage: /randomtp [player]
     aliases: [rtp]
     permission: nexuscore.randomtp
+  spawn:
+    description: Teleport to spawnpoint if set.
+    usage: /spawn [player|reset|set]
+    permission: nexuscore.spawn
+  tp:
+    description: Teleport to target player.
+    usage: /tp [player]
+    aliases: teleport
+    permission: nexuscore.tp
 
 permissions:
   nexuscore.*:
@@ -52,6 +61,9 @@ permissions:
     children:
       nexuscore.admin.reload: true
       nexuscore.version: true
+      nexuscore.spawn: true
+      nexuscore.spawn.reset: true
+      nexuscore.spawn.set: true
       # Essentials admin (others) permissions
       nexuscore.feed.others: true
       nexuscore.heal.others: true
@@ -59,6 +71,8 @@ permissions:
       nexuscore.fly.others: true
       nexuscore.jump.others: true
       nexuscore.randomtp.others: true
+      nexuscore.spawn.player: true
+      nexuscore.tp.other: true
   nexuscore.admin.reload:
     description: Allows use of /nexusreload.
     default: op
@@ -79,6 +93,16 @@ permissions:
     default: true
   nexuscore.randomtp:
     default: true
+  nexuscore.spawn:
+    default: op
+  nexuscore.spawn.reset:
+    default: op
+  nexuscore.spawn.set:
+    default: op
+  nexuscore.tp:
+    default: true
+  nexuscore.tphere:
+    default: true
 
   # Others (admin) sub-perms
   nexuscore.feed.others:
@@ -92,4 +116,8 @@ permissions:
   nexuscore.jump.others:
     default: op
   nexuscore.randomtp.others:
+    default: op
+  nexuscore.spawn.player:
+    default: op
+  nexuscore.tp.other:
     default: op

@@ -1,0 +1,78 @@
+# Scoreboard.yml
+# You can safely change colors, text, and formatting around the placeholders below.
+# Do NOT remove the placeholders listed in "required_placeholders" for each line,
+# or the plugin will fall back to the default template for that specific line.
+
+Title: "<gradient:#3498DB:#9B59B6><bold>NexusCore Board</bold></gradient>"
+
+# Timezone can be an IANA zone (recommended) or a common shorthand:
+# IANA examples: America/Detroit, America/New_York, Europe/London, UTC
+# Shorthand examples: EST, EDT, CST, CDT, MST, MDT, PST, PDT, UTC
+Timezone: "America/Detroit"
+
+Separator:
+  Top: "<gray>———————————————</gray>"
+  Bottom: "<gray>———————————————</gray>"
+
+# You may format the text and colors freely, but keep the required placeholders.
+# If a line is missing its required placeholders, it will use a safe default.
+Lines:
+  L01_TopRule:
+    template: "<gray>———————————————</gray>"
+    required_placeholders: []  # none
+
+  L02_Player:
+    template: "<white>Player:</white> <green>{player}</green>"
+    required_placeholders: ["{player}"]
+
+  L03_Rank:
+    template: "<white>Rank:</white> <aqua>{rank}</aqua>"
+    required_placeholders: ["{rank}"]
+
+  L04_World:
+    template: "<white>World:</white> <yellow>{world}</yellow>"
+    required_placeholders: ["{world}"]
+
+  L05_XYZ:
+    template: "<white>XYZ:</white> <gray>{x}</gray><dark_gray>,</dark_gray><gray>{y}</gray><dark_gray>,</dark_gray><gray>{z}</gray>"
+    required_placeholders: ["{x}", "{y}", "{z}"]
+
+  L06_Online:
+    template: "<white>Online:</white> <green>{online}</green>"
+    required_placeholders: ["{online}"]
+
+  L07_Tps:
+    template: "<white>TPS:</white> <gold>{tps}</gold>"
+    required_placeholders: ["{tps}"]
+
+  L08_Ping:
+    template: "<white>Ping:</white> <gold>{ping}</gold>"
+    required_placeholders: ["{ping}"]
+
+  L09_Spacer1:
+    template: "<gray> </gray>"
+    required_placeholders: []
+
+  L10_Tip:
+    template: "<gray>Tips:</gray> <dark_gray>/nexus</dark_gray>"
+    required_placeholders: []
+
+  L11_Discord:
+    template: "<gray>Discord:</gray> <blue>{discord}</blue>"
+    required_placeholders: ["{discord}"]
+
+  L12_Website:
+    template: "<gray>Website:</gray> <blue>{website}</blue>"
+    required_placeholders: ["{website}"]
+
+  L13_Spacer2:
+    template: "<gray> </gray>"
+    required_placeholders: []
+
+  L14_Time:
+    template: "<gray>Time:</gray> <white>{time}</white>"
+    required_placeholders: ["{time}"]
+
+  L15_BottomRule:
+    template: "<gray>———————————————</gray>"
+    required_placeholders: []

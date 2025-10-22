@@ -1,5 +1,7 @@
 package dev.sergeantfuzzy.NexusCore.Commands.Admin;
 
+import dev.sergeantfuzzy.NexusCore.System.Scoreboard.Scoreboard;
+import dev.sergeantfuzzy.NexusCore.System.Tablist.Tablist;
 import dev.sergeantfuzzy.NexusCore.Utilities.i18n;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +21,8 @@ public final class AdminCommandReload {
             return true;
         }
         plugin.reloadConfig();
+        Scoreboard.reloadAndApply();
+        Tablist.reloadAndApply();
         i18n.sendMM(sender,
                 "<gradient:#3498DB:#9B59B6><b>NexusCore</b></gradient> <gray>»</gray> " +
                         "<green>Configuration reloaded.</green> " +

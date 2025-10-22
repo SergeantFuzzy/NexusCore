@@ -1,0 +1,32 @@
+# Tablist.yml
+# Owner-safe styling: change colors, gradients, and line layouts freely.
+# Do NOT change the placeholder names themselves to avoid breakage.
+#
+# Available placeholders:
+# {server} {motd} {online} {max} {tps} {ping} {time} {timezone} {player}
+# (Per-player values like {ping} resolve for each viewer)
+#
+# Notes:
+# - Lines are concatenated with newlines in the header/footer.
+
+Title: "<gradient:#3498DB:#9B59B6><bold>NexusCore</bold></gradient> <gray>»</gray> <italic>Network</italic>"
+
+Timezone: "America/Detroit"  # Shorthands like EST, PST also accepted.
+
+Header:
+  - "<gray>┌──────────────────────────────────────┐</gray>"
+  - "<white>Welcome to</white> <gradient:#3498DB:#9B59B6><bold>{server}</bold></gradient>"
+  - "<gray>Players:</gray> <green>{online}</green><gray>/</gray><white>{max}</white>"
+  - "<gray>Time:</gray> <white>{time}</white> <dark_gray>({timezone})</dark_gray>"
+  - "<gray>└──────────────────────────────────────┘</gray>"
+
+Footer:
+  - "<gray>TPS:</gray> <gold>{tps}</gold> <dark_gray>•</dark_gray> <gray>Your Ping:</gray> <gold>{ping}</gold>"
+  - "<gray>Need help?</gray> <dark_gray>/</dark_gray><white>nexus</white>"
+  - "<gray>Website:</gray> <blue>sergeantfuzzy.dev</blue>  <dark_gray>|</dark_gray>  <gray>Discord:</gray> <blue>discord.gg/yourlink</blue>"
+
+# (Optional) Per-player name format in the tab list (not the sidebar).
+# Requires modern Paper; safely ignored if unsupported.
+PlayerName:
+  Enabled: false
+  Format: "<gold>{player}</gold>"  # Only color/style; do NOT add extra placeholders.

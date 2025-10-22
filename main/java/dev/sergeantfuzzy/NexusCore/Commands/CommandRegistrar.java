@@ -1,13 +1,11 @@
 package dev.sergeantfuzzy.NexusCore.Commands;
 
 import dev.sergeantfuzzy.NexusCore.Commands.Admin.AdminCommandReload;
+import dev.sergeantfuzzy.NexusCore.Commands.Admin.Util.CommandHelp;
 import dev.sergeantfuzzy.NexusCore.Commands.Admin.Util.CommandVersion;
-import dev.sergeantfuzzy.NexusCore.Commands.Essentials.FeedCommand;
-import dev.sergeantfuzzy.NexusCore.Commands.Essentials.FlyCommand;
-import dev.sergeantfuzzy.NexusCore.Commands.Essentials.HealCommand;
-import dev.sergeantfuzzy.NexusCore.Commands.Essentials.HealthCommand;
-import dev.sergeantfuzzy.NexusCore.Commands.Essentials.JumpCommand;
-import dev.sergeantfuzzy.NexusCore.Commands.Essentials.RandomTPCommand;
+import dev.sergeantfuzzy.NexusCore.Commands.Essentials.*;
+import dev.sergeantfuzzy.NexusCore.Listeners.Commands.HelpOverrideListener;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.CommandMap;
@@ -58,6 +56,24 @@ public final class CommandRegistrar {
             });
             EssentialsTabRegistry.register("nc", EssentialsTabRegistry.get("nexus"));
             EssentialsTabRegistry.register("ncore", EssentialsTabRegistry.get("nexus"));
+        }
+        {
+            final String SPIGOT_URL = "https://www.spigotmc.org/resources/129669/";
+            final String BBB_URL    = "https://builtbybit.com/resources/80896/";
+            final String DISCORD    = "https://discord.com/users/193943556459724800";
+            CommandHelp helpExec = new CommandHelp(plugin, SPIGOT_URL, BBB_URL, DISCORD);
+            register(plugin,
+                    "nexushelp",
+                    "Open NexusCore Help (Book UI)",
+                    List.of("nhelp"),
+                    helpExec);
+            EssentialsTabRegistry.register("nexushelp", (sender, alias, args) -> {
+                if (args.length != 1) return List.of();
+                var opts = List.of("help", "commands", "perms", "links");
+                return matchPrefix(opts, args[0]);
+            });
+            EssentialsTabRegistry.register("nhelp", EssentialsTabRegistry.get("nexushelp"));
+            plugin.getServer().getPluginManager().registerEvents(new HelpOverrideListener(plugin), plugin);
         }
         registerEssentials(plugin, globalCompleter);
     }
@@ -140,6 +156,85 @@ public final class CommandRegistrar {
                 return List.of();
             });
             EssentialsTabRegistry.register("randomtp", EssentialsTabRegistry.get("rtp"));
+        }
+        {
+            SpawnCommand exec = new SpawnCommand(plugin);
+            register(
+                    plugin,
+                    "spawn",
+                    "Teleport to spawn; set/reset spawn; send a player to spawn",
+                    List.of(),
+                    exec,
+                    globalCompleter
+            );
+            EssentialsTabRegistry.register("spawn", (sender, alias, args) -> {
+                String PERM_SET   = SpawnCommand.PERM_SET;
+                String PERM_RESET = SpawnCommand.PERM_RESET;
+                String PERM_SEND  = SpawnCommand.PERM_SEND;
+                if (args.length == 0) {
+                    return List.of();
+                }
+                if (args.length == 1) {
+                    java.util.List<String> opts = new java.util.ArrayList<>();
+                    if (sender.hasPermission(PERM_SET))   opts.add("set");
+                    if (sender.hasPermission(PERM_RESET)) opts.add("reset");
+                    if (sender.hasPermission(PERM_SEND))  { opts.add("player"); opts.add("p"); }
+                    return matchPrefix(opts, args[0]);
+                }
+                if (args.length == 2 && (args[0].equalsIgnoreCase("player") || args[0].equalsIgnoreCase("p"))) {
+                    if (!sender.hasPermission(PERM_SEND)) return List.of();
+                    return matchPrefix(onlinePlayerNames(), args[1]);
+                }
+                return List.of();
+            });
+        }
+        {
+            TPCommand exec = new TPCommand(plugin);
+            register(
+                    plugin,
+                    "tp",
+                    "Teleport to a player or move one player to another",
+                    List.of("teleport"),
+                    exec
+            );
+            register(
+                    plugin,
+                    "tphere",
+                    "Teleport a player to yourself",
+                    List.of("teleporthere"),
+                    exec
+            );
+            EssentialsTabRegistry.register("tp", (sender, alias, args) -> {
+                final String PERM_SELF   = "nexuscore.tp";
+                final String PERM_HERE   = "nexuscore.tphere";
+                final String PERM_OTHER  = "nexuscore.tp.other";
+                if (args.length == 0) return List.of();
+                var names = EssentialsTabRegistry.onlinePlayerNames();
+                if (args.length == 1) {
+                    boolean isPlayer = (sender instanceof org.bukkit.entity.Player);
+                    java.util.ArrayList<String> base = new java.util.ArrayList<>();
+                    if (sender.hasPermission(PERM_SELF)) {
+                        base.addAll(names);
+                    }
+                    if (isPlayer && sender.hasPermission(PERM_HERE)) {
+                        base.add("here");
+                    }
+                    if (sender.hasPermission(PERM_OTHER) && base.isEmpty()) {
+                        base.addAll(names);
+                    }
+                    return EssentialsTabRegistry.matchPrefix(base, args[0]);
+                }
+                if (args.length == 2 && sender.hasPermission(PERM_OTHER)) {
+                    return EssentialsTabRegistry.matchPrefix(names, args[1]);
+                }
+                return List.of();
+            });
+            EssentialsTabRegistry.register("teleport", EssentialsTabRegistry.get("tp"));
+            EssentialsTabRegistry.register("tphere", (sender, alias, args) -> {
+                final String PERM_HERE = "nexuscore.tphere";
+                if (args.length != 1 || !sender.hasPermission(PERM_HERE)) return List.of();
+                return EssentialsTabRegistry.matchPrefix(EssentialsTabRegistry.onlinePlayerNames(), args[0]);
+            });
         }
     }
     private static void register(JavaPlugin plugin,

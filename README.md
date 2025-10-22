@@ -7,11 +7,14 @@ Designed for modern Paper/Spigot servers (1.20+).
 
 ## Features
 
-- **Core Command Suite**  
-- **Polished GUIs**  
-- **Admin Utilities**  
-- **Tab Completion**  
-- **Clean Command Registrar**  
+- **Core Command Suite**
+- **Custom GUI Menus**
+- **Configurable Systems**
+- **Dynamic Scoreboard & Tablist**
+- **Intelligent Tab Completion**
+- **Clean Command Registration**
+- **Guide Book on Join**
+- **Smart Update Checker**
 
 ---
 
@@ -30,45 +33,55 @@ Designed for modern Paper/Spigot servers (1.20+).
 
 ## Commands
 
-| Command            | Aliases                      | Description                                                                 |
-|--------------------|------------------------------|-----------------------------------------------------------------------------|
-| `/nexus`           | `/nc`, `/ncore`, `/nexuscore` | Opens NexusCore menu (player) or shows usage in console                     |
-| `/nexus reload`    | —                            | Reloads configuration/messages                                              |
-| `/nexus version`   | —                            | Shows plugin/version/build information                                      |
-| `/feed`            | `/food`, `/hunger`           | Feed yourself; `/feed status` or `/feed <player>`                           |
-| `/heal`            | —                            | Heal yourself or another player                                             |
-| `/health`          | —                            | View health; `/health status [player]`                                      |
-| `/fly`             | —                            | Toggle/set flight: `/fly [on|off] [player]`, `/fly status [player]`         |
-| `/jump`            | —                            | Jump to targeted block or make another player jump                          |
-| `/randomtp`        | `/rtp`                       | Randomly teleport yourself or another player                                |
+| Command          | Aliases                       | Description                                                         |
+|------------------|-------------------------------|---------------------------------------------------------------------|
+| `/nexus`         | `/nc`, `/ncore`, `/nexuscore` | Opens NexusCore menu (player) or shows usage in console             |
+| `/nexus reload`  | —                             | Reloads configuration/messages                                      |
+| `/nexus version` | —                             | Shows plugin/version/build information                              |
+| `/feed`          | `/food`, `/hunger`            | Feed yourself; `/feed status` or `/feed <player>`                   |
+| `/heal`          | —                             | Heal yourself or another player                                     |
+| `/health`        | —                             | View health; `/health status [player]`                              |
+| `/fly`           | —                             | Toggle/set flight: `/fly [on/off] [player]`, `/fly status [player]` |
+| `/jump`          | —                             | Jump to targeted block or make another player jump                  |
+| `/randomtp`      | `/rtp`                        | Randomly teleport yourself or another player                        |
+| `/spawn`         | —                             | Teleport to spawnpoint if set                                       |
+| `/teleport`      | `/tp`                         | Default teleport command                                            |
+| `/teleporthere`  | `/tphere`                     | Teleport a player to your location                                  |
 
 > When used with no args by a player, `/nexus` opens the main GUI.
 
 ### Permissions
 
-| Permission                   | Default | Description                                   |
-|-----------------------------|---------|-----------------------------------------------|
-| `nexuscore.use`             | true    | Allows `/nexus` in-game                       |
-| `nexuscore.reload`          | op      | Allows `/nexus reload`                        |
-| `nexuscore.version`         | true    | Allows `/nexus version`                       |
-| `nexuscore.update.notify`   | op      | Receive in-game update notices on join        |
-| **Self actions**            |         |                                               |
-| `nexuscore.feed`            | true    | Use `/feed`                                   |
-| `nexuscore.heal`            | true    | Use `/heal`                                   |
-| `nexuscore.health`          | true    | Use `/health`                                 |
-| `nexuscore.fly`             | true    | Use `/fly`                                    |
-| `nexuscore.jump`            | true    | Use `/jump`                                   |
-| `nexuscore.randomtp`        | true    | Use `/randomtp`                               |
-| **Affect others**           |         |                                               |
-| `nexuscore.feed.others`     | op      | Use `/feed <player>`                          |
-| `nexuscore.heal.others`     | op      | Use `/heal <player>`                          |
-| `nexuscore.health.others`   | op      | View `/health status <player>`                |
-| `nexuscore.fly.others`      | op      | Use `/fly ... <player>`                       |
-| `nexuscore.jump.others`     | op      | Make another player jump                      |
-| `nexuscore.randomtp.others` | op      | `/randomtp <player>`                          |
-| **Groups**                  |         |                                               |
-| `nexuscore.admin.*`         | op      | All admin commands + “others” sub-perms       |
-| `nexuscore.*`               | op      | Everything (admin + update notify)            |
+| Permission                  | Default | Description                             |
+|-----------------------------|---------|-----------------------------------------|
+| `nexuscore.use`             | true    | Allows `/nexus` in-game                 |
+| `nexuscore.reload`          | op      | Allows `/nexus reload`                  |
+| `nexuscore.version`         | true    | Allows `/nexus version`                 |
+| `nexuscore.update.notify`   | op      | Receive in-game update notices on join  |
+| **Self actions**            |         |                                         |
+| `nexuscore.feed`            | true    | Use `/feed`                             |
+| `nexuscore.heal`            | true    | Use `/heal`                             |
+| `nexuscore.health`          | true    | Use `/health`                           |
+| `nexuscore.fly`             | true    | Use `/fly`                              |
+| `nexuscore.jump`            | true    | Use `/jump`                             |
+| `nexuscore.randomtp`        | true    | Use `/randomtp`                         |
+| `nexuscore.spawn`           | op      | Use `/spawn`                            |
+| `nexuscore.spawn.set`       | op      | Use `/spawn set`                        |
+| `nexuscore.spawn.reset`     | op      | Use `/spawn reset`                      |
+| `nexuscore.tp`              | true    | Use `/teleport`                         |
+| `nexuscore.tphere`          | true    | Use `/tphere`                           |
+| **Affect others**           |         |                                         |
+| `nexuscore.feed.others`     | op      | Use `/feed <player>`                    |
+| `nexuscore.heal.others`     | op      | Use `/heal <player>`                    |
+| `nexuscore.health.others`   | op      | View `/health status <player>`          |
+| `nexuscore.fly.others`      | op      | Use `/fly ... <player>`                 |
+| `nexuscore.jump.others`     | op      | Make another player jump                |
+| `nexuscore.randomtp.others` | op      | `/randomtp <player>`                    |
+| `nexuscore.spawn.player`    | op      | Use `/spawn player <player>`            |
+| `nexuscore.tp.other`        | op      | `/teleport <playerA> <playerB>`         |
+| **Groups**                  |         |                                         |
+| `nexuscore.admin.*`         | op      | All admin commands + “others” sub-perms |
+| `nexuscore.*`               | op      | Everything (admin + update notify)      |
 
 
 
