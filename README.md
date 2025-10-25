@@ -1,7 +1,7 @@
 # NexusCore
 
-Welcome to the **NexusCore** ecosystem with commands, GUIs, and powerful utilities in one core.  
-Designed for modern Paper/Spigot servers (1.20+).
+Welcome to **NexusCore**. a network core containing admin and essential commands, GUI menus, and utilities in one server core plugin.  
+Prepared for modern Paper/Spigot servers running (1.20+).
 
 ---
 
@@ -11,7 +11,7 @@ Designed for modern Paper/Spigot servers (1.20+).
 - **Custom GUI Menus**
 - **Configurable Systems**
 - **Dynamic Scoreboard & Tablist**
-- **Intelligent Tab Completion**
+- **Command Suggestions**
 - **Clean Command Registration**
 - **Guide Book on Join**
 - **Smart Update Checker**
