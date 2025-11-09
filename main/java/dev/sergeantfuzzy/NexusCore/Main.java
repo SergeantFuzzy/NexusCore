@@ -1,5 +1,6 @@
 package dev.sergeantfuzzy.NexusCore;
 
+import dev.sergeantfuzzy.NexusCore.Abilities.AbilityManager;
 import dev.sergeantfuzzy.NexusCore.Commands.CommandRegistrar;
 import dev.sergeantfuzzy.NexusCore.Listeners.AdminJoinListener;
 import dev.sergeantfuzzy.NexusCore.Listeners.LeaveListener;
@@ -32,6 +33,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        AbilityManager.init(this);
         Msg.printBanner(this, "BOOTED ✔️");
         UpdateChecker checker = new UpdateChecker(this, SPIGOT_ID, BBB_URL);
         updates = UpdateBootstrap.enable(this, checker);

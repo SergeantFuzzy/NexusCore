@@ -1,5 +1,6 @@
 package dev.sergeantfuzzy.NexusCore.GUI;
 
+import dev.sergeantfuzzy.NexusCore.GUI.Abilities.AbilitiesMenu;
 import dev.sergeantfuzzy.NexusCore.GUI.Commands.CommandsMenu;
 import dev.sergeantfuzzy.NexusCore.GUI.Settings.SettingsMenu;
 import dev.sergeantfuzzy.NexusCore.Utilities.Msg;
@@ -66,12 +67,13 @@ public final class NexusCoreMenu implements Listener {
         for (int i = 0; i < SIZE; i++) {
             inv.setItem(i, filler(i));
         }
-        inv.setItem(2, comingSoonItem(
+        inv.setItem(2, actionItem(
                 Material.NETHER_STAR,
                 "<yellow><bold>Abilities</bold></yellow>",
                 List.of(
-                        "<gray>Customize passive and active abilities.</gray>",
-                        "<dark_gray>Coming soon.</dark_gray>"
+                        "<gray>Browse and activate Nexus abilities.</gray>",
+                        "<gray>Combat, traversal, and utility skills.</gray>",
+                        "<green>Click to open.</green>"
                 ),
                 "abilities"
         ));
@@ -172,7 +174,7 @@ public final class NexusCoreMenu implements Listener {
                 player.closeInventory();
             }
             case "abilities" -> {
-                i18n.sendMM(player, "<gray>That section is </gray><yellow><bold>coming soon</bold></yellow><gray>.</gray>");
+                AbilitiesMenu.open((JavaPlugin) plugin, player);
             }
             case "commands" -> {
                 CommandsMenu.init((JavaPlugin) plugin);

@@ -1,5 +1,6 @@
 package dev.sergeantfuzzy.NexusCore.Commands.Admin;
 
+import dev.sergeantfuzzy.NexusCore.Abilities.AbilityManager;
 import dev.sergeantfuzzy.NexusCore.System.Scoreboard.Scoreboard;
 import dev.sergeantfuzzy.NexusCore.System.Tablist.Tablist;
 import dev.sergeantfuzzy.NexusCore.Utilities.i18n;
@@ -21,6 +22,9 @@ public final class AdminCommandReload {
             return true;
         }
         plugin.reloadConfig();
+        if (AbilityManager.isReady()) {
+            AbilityManager.instance().reloadSettings();
+        }
         Scoreboard.reloadAndApply();
         Tablist.reloadAndApply();
         i18n.sendMM(sender,

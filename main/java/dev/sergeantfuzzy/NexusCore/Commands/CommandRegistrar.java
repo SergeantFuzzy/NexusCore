@@ -3,6 +3,7 @@ package dev.sergeantfuzzy.NexusCore.Commands;
 import dev.sergeantfuzzy.NexusCore.Commands.Admin.AdminCommandReload;
 import dev.sergeantfuzzy.NexusCore.Commands.Admin.Util.CommandHelp;
 import dev.sergeantfuzzy.NexusCore.Commands.Admin.Util.CommandVersion;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Abilities.AbilitiesCommand;
 import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Combat.HealCommand;
 import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Combat.HealthCommand;
 import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement.BackCommand;
@@ -82,6 +83,17 @@ public final class CommandRegistrar {
             });
             EssentialsTabRegistry.register("nhelp", EssentialsTabRegistry.get("nexushelp"));
             plugin.getServer().getPluginManager().registerEvents(new HelpOverrideListener(plugin), plugin);
+        }
+        {
+            AbilitiesCommand abilities = new AbilitiesCommand(plugin);
+            register(
+                    plugin,
+                    "abilities",
+                    "Open the abilities menu or activate a Nexus ability",
+                    List.of("ability", "skills"),
+                    abilities,
+                    abilities
+            );
         }
         registerEssentials(plugin, globalCompleter);
     }

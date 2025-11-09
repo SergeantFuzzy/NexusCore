@@ -20,3 +20,94 @@ System:
   #    - Applies formatted header/footer and player name decorations (if implemented)
   #    - Disable to keep the default vanilla/MOTD tablist
   Tablist: true
+
+# ─────────────────────────────────────────────────────────
+# Ability System
+# Toggle the gameplay ability system and adjust cooldowns.
+# Each ability can be individually disabled or tuned.
+# ─────────────────────────────────────────────────────────
+Abilities:
+  Enabled: true
+  DefaultCooldownSeconds: 45
+  PerAbility:
+    berserk:
+      Enabled: true
+      CooldownSeconds: 45
+    guardian_shell:
+      Enabled: true
+      CooldownSeconds: 60
+    blink:
+      Enabled: true
+      CooldownSeconds: 25
+    regrowth:
+      Enabled: true
+      CooldownSeconds: 35
+    shockwave:
+      Enabled: true
+      CooldownSeconds: 40
+    inferno:
+      Enabled: true
+      CooldownSeconds: 50
+    frost_nova:
+      Enabled: true
+      CooldownSeconds: 45
+    feather_fall:
+      Enabled: true
+      CooldownSeconds: 30
+    energize:
+      Enabled: true
+      CooldownSeconds: 30
+    lifeline:
+      Enabled: true
+      CooldownSeconds: 75
+    stone_skin:
+      Enabled: true
+      CooldownSeconds: 50
+    wind_step:
+      Enabled: true
+      CooldownSeconds: 25
+    thunderclap:
+      Enabled: true
+      CooldownSeconds: 55
+    verdant:
+      Enabled: true
+      CooldownSeconds: 40
+    night_stalker:
+      Enabled: true
+      CooldownSeconds: 35
+    arctic_aura:
+      Enabled: true
+      CooldownSeconds: 55
+    flame_dash:
+      Enabled: true
+      CooldownSeconds: 30
+    arcane_pulse:
+      Enabled: true
+      CooldownSeconds: 50
+    miners_focus:
+      Enabled: true
+      CooldownSeconds: 45
+    gravity_well:
+      Enabled: true
+      CooldownSeconds: 60
+    radiant_heal:
+      Enabled: true
+      CooldownSeconds: 50
+    rift_recall:
+      Enabled: true
+      CooldownSeconds: 70
+    tide_caller:
+      Enabled: true
+      CooldownSeconds: 55
+    beastmaster:
+      Enabled: true
+      CooldownSeconds: 60
+    earthshatter:
+      Enabled: true
+      CooldownSeconds: 55
+    skybound_leap:
+      Enabled: true
+      CooldownSeconds: 35
+    solar_flare:
+      Enabled: true
+      CooldownSeconds: 45

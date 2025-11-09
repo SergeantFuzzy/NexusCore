@@ -51,6 +51,11 @@ commands:
     description: Return to your previous location.
     usage: /back [player]
     permission: nexuscore.back
+  abilities:
+    description: Open the Nexus abilities menu or activate an ability.
+    usage: /abilities [menu|list|info <ability>|use <ability>]
+    aliases: [ability, skills]
+    permission: nexuscore.abilities
 
 permissions:
   nexuscore.*:
@@ -58,6 +63,7 @@ permissions:
     default: op
     children:
       nexuscore.admin.*: true
+      nexuscore.abilities.*: true
       nexuscore.update.notify: true
   nexuscore.admin.*:
     description: Grants access to all NexusCore admin commands.
@@ -79,6 +85,7 @@ permissions:
       nexuscore.tp.other: true
       nexuscore.back: true
       nexuscore.back.others: true
+      nexuscore.abilities.*: true
   nexuscore.admin.reload:
     description: Allows use of /nexusreload.
     default: op
@@ -111,6 +118,40 @@ permissions:
     default: true
   nexuscore.back:
     default: true
+  nexuscore.abilities:
+    default: true
+  nexuscore.abilities.gui:
+    default: true
+  nexuscore.abilities.use.*:
+    default: op
+    children:
+      nexuscore.abilities.use.berserk: true
+      nexuscore.abilities.use.guardian_shell: true
+      nexuscore.abilities.use.blink: true
+      nexuscore.abilities.use.regrowth: true
+      nexuscore.abilities.use.shockwave: true
+      nexuscore.abilities.use.inferno: true
+      nexuscore.abilities.use.frost_nova: true
+      nexuscore.abilities.use.feather_fall: true
+      nexuscore.abilities.use.energize: true
+      nexuscore.abilities.use.lifeline: true
+      nexuscore.abilities.use.stone_skin: true
+      nexuscore.abilities.use.wind_step: true
+      nexuscore.abilities.use.thunderclap: true
+      nexuscore.abilities.use.verdant: true
+      nexuscore.abilities.use.night_stalker: true
+      nexuscore.abilities.use.arctic_aura: true
+      nexuscore.abilities.use.flame_dash: true
+      nexuscore.abilities.use.arcane_pulse: true
+      nexuscore.abilities.use.miners_focus: true
+      nexuscore.abilities.use.gravity_well: true
+      nexuscore.abilities.use.radiant_heal: true
+      nexuscore.abilities.use.rift_recall: true
+      nexuscore.abilities.use.tide_caller: true
+      nexuscore.abilities.use.beastmaster: true
+      nexuscore.abilities.use.earthshatter: true
+      nexuscore.abilities.use.skybound_leap: true
+      nexuscore.abilities.use.solar_flare: true
 
   # Others (admin) sub-perms
   nexuscore.feed.others:
@@ -131,3 +172,57 @@ permissions:
     default: op
   nexuscore.back.others:
     default: op
+  nexuscore.abilities.use.berserk:
+    default: false
+  nexuscore.abilities.use.guardian_shell:
+    default: false
+  nexuscore.abilities.use.blink:
+    default: false
+  nexuscore.abilities.use.regrowth:
+    default: false
+  nexuscore.abilities.use.shockwave:
+    default: false
+  nexuscore.abilities.use.inferno:
+    default: false
+  nexuscore.abilities.use.frost_nova:
+    default: false
+  nexuscore.abilities.use.feather_fall:
+    default: false
+  nexuscore.abilities.use.energize:
+    default: false
+  nexuscore.abilities.use.lifeline:
+    default: false
+  nexuscore.abilities.use.stone_skin:
+    default: false
+  nexuscore.abilities.use.wind_step:
+    default: false
+  nexuscore.abilities.use.thunderclap:
+    default: false
+  nexuscore.abilities.use.verdant:
+    default: false
+  nexuscore.abilities.use.night_stalker:
+    default: false
+  nexuscore.abilities.use.arctic_aura:
+    default: false
+  nexuscore.abilities.use.flame_dash:
+    default: false
+  nexuscore.abilities.use.arcane_pulse:
+    default: false
+  nexuscore.abilities.use.miners_focus:
+    default: false
+  nexuscore.abilities.use.gravity_well:
+    default: false
+  nexuscore.abilities.use.radiant_heal:
+    default: false
+  nexuscore.abilities.use.rift_recall:
+    default: false
+  nexuscore.abilities.use.tide_caller:
+    default: false
+  nexuscore.abilities.use.beastmaster:
+    default: false
+  nexuscore.abilities.use.earthshatter:
+    default: false
+  nexuscore.abilities.use.skybound_leap:
+    default: false
+  nexuscore.abilities.use.solar_flare:
+    default: false

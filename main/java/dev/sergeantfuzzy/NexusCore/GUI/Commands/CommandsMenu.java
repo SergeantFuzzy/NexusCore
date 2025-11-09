@@ -31,14 +31,15 @@ public final class CommandsMenu implements Listener {
     private static final String TITLE_CORE_MM = "<gradient:#3498DB:#9B59B6><bold>Commands:</bold></gradient> <gray>»</gray> <italic>Core</italic>";
     private static final String TITLE_MAIN_MM = "<gradient:#3498DB:#9B59B6><bold>NexusCore</bold></gradient> <gray>»</gray> Commands";
     private static final String TITLE_ESS_MM = "<gradient:#3498DB:#9B59B6><bold>Commands:</bold></gradient> <gray>»</gray> <italic>Essentials</italic>";
-    private static final List<String> ESSENTIALS_SELF_COMMANDS = List.of("feed", "fly", "heal", "health", "jump", "rtp");
+    private static final List<String> ESSENTIALS_SELF_COMMANDS = List.of("feed", "fly", "heal", "health", "jump", "rtp", "back");
     private static final java.util.Map<String, Material> ESS_ICON = java.util.Map.of(
             "feed",   Material.COOKED_BEEF,
             "fly",    Material.FEATHER,
             "heal",   Material.GOLDEN_APPLE,
             "health", Material.RED_DYE,
             "jump",   Material.RABBIT_FOOT,
-            "rtp",    Material.ENDER_PEARL
+            "rtp",    Material.ENDER_PEARL,
+            "back",   Material.COMPASS
     );
     private static final java.util.Map<String, java.util.List<String>> ESS_LORE = java.util.Map.of(
             "feed", java.util.List.of(
@@ -85,6 +86,15 @@ public final class CommandsMenu implements Listener {
                     "§9§lNotes§7: §8Ideal for builders & staff navigation.",
                     "§8§m────────────────────",
                     "§a↪ §7Click to run §f/jump"
+            ),
+            "back", java.util.List.of(
+                    "§8§m────────────────────",
+                    "§9§lAction§7: §fReturn to your previous safe location.",
+                    "§9§lUsage§7: §f/back [player]",
+                    "§9§lContext§7: §fUndo /tp, deaths, or risky teleports.",
+                    "§9§lNotes§7: §8Requires a stored location (teleport/death).",
+                    "§8§m────────────────────",
+                    "§a↪ §7Click to run §f/back"
             ),
             "rtp", java.util.List.of(
                     "§8§m────────────────────",
