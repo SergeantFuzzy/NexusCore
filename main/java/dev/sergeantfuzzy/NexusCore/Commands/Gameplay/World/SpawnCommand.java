@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Util.GameplayCommandUtil.*;
+
 public final class SpawnCommand implements TabExecutor {
     private final JavaPlugin plugin;
     private final File file;
@@ -104,7 +106,11 @@ public final class SpawnCommand implements TabExecutor {
                 return true;
             }
             ((Player) sender).teleport(spawn);
-            say(sender, "<green>Teleported to spawn.</green>");
+            say(sender, "<green>Teleported to spawn.</green>" + actionBar(
+                    runAction("Back", "/back", "Return to your previous spot"),
+                    runAction("Set Spawn", "/spawn set", "Update the spawn to you"),
+                    suggestAction("Send Player", "/spawn player ", "Type who to send")
+            ));
             return true;
         }
         switch (args[0].toLowerCase(Locale.ROOT)) {
@@ -113,7 +119,11 @@ public final class SpawnCommand implements TabExecutor {
                 if (needPlayer(sender)) return true;
                 Player p = (Player) sender;
                 saveSpawn(p.getLocation());
-                say(sender, "<green>Spawn point set to your current location.</green>");
+                say(sender, "<green>Spawn point set to your current location.</green>" + actionBar(
+                        runAction("Teleport", "/spawn", "Visit spawn now"),
+                        runAction("Reset", "/spawn reset", "Clear the spawn point"),
+                        suggestAction("Send Player", "/spawn player ", "Type who to send")
+                ));
                 return true;
             }
             case "reset" -> {
@@ -123,7 +133,11 @@ public final class SpawnCommand implements TabExecutor {
                     return true;
                 }
                 resetSpawn();
-                say(sender, "<green>Spawn point has been reset.</green>");
+                say(sender, "<green>Spawn point has been reset.</green>" + actionBar(
+                        runAction("Set Spawn", "/spawn set", "Set a new spawn"),
+                        runAction("Teleport", "/spawn", "Visit spawn"),
+                        suggestAction("Send Player", "/spawn player ", "Type who to send")
+                ));
                 return true;
             }
             case "player", "p" -> {
@@ -147,8 +161,16 @@ public final class SpawnCommand implements TabExecutor {
                     return true;
                 }
                 target.teleport(spawn);
-                say(sender, "<green>Sent</green> <white>" + target.getName() + "</white> <green>to spawn.</green>");
-                say(target, "<green>You have been sent to spawn.</green>");
+                say(sender, "<green>Sent</green> <white>" + target.getName() + "</white> <green>to spawn.</green>" + actionBar(
+                        runAction("Back " + target.getName(), "/back " + target.getName(), "Undo their teleport"),
+                        runAction("Teleport", "/spawn", "Visit spawn yourself"),
+                        suggestAction("Send Player", "/spawn player ", "Type another player")
+                ));
+                say(target, "<green>You have been sent to spawn.</green>" + actionBar(
+                        runAction("Back", "/back", "Return to your previous spot"),
+                        runAction("Home", "/spawn", "Stay at spawn"),
+                        suggestAction("Visit Friend", "/tp ", "Type someone to visit")
+                ));
                 return true;
             }
             default -> {

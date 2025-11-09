@@ -33,8 +33,12 @@ public final class RandomTPCommand implements CommandExecutor, TabCompleter {
             if (!sender.hasPermission(PERM_SELF) || !ensurePlayerSender(sender)) return true;
             Player p = (Player) sender;
             if (rtp(p)) {
-                sendPrefixedMM(sender, "<green>Teleported to a random safe location.</green> " +
-                        choiceBar("/rtp", "Random teleport again"));
+                sendPrefixedMM(sender, "<green>Teleported to a random safe location.</green>" +
+                        actionBar(
+                                runAction("Try Again", "/rtp", "Roll another random location"),
+                                runAction("Back", "/back", "Return to your previous spot"),
+                                suggestAction("RTP Player", "/rtp ", "Type a player name to random-teleport them")
+                        ));
             } else {
                 sendPrefixedMM(sender, "<red>Failed to find a safe spot. Try again.</red>");
             }
@@ -52,8 +56,17 @@ public final class RandomTPCommand implements CommandExecutor, TabCompleter {
         }
         Player t = opt.get();
         if (rtp(t)) {
-            sendPrefixedMM(sender, "<green>Random-teleported <b><name></b>.</green>",
+            sendPrefixedMM(sender, "<green>Random-teleported <b><name></b>.</green>" + actionBar(
+                            runAction("Again", "/rtp " + t.getName(), "Send them somewhere else"),
+                            runAction("Back", "/back", "Return them if needed"),
+                            suggestAction("RTP Player", "/rtp ", "Type another player")
+                    ),
                     Placeholder.unparsed("name", t.getName()));
+            sendPrefixedMM(t, "<green>You were random-teleported by <b><name></b>.</green>" + actionBar(
+                            runAction("Back", "/back", "Return to your previous location"),
+                            runAction("Try Myself", "/rtp", "Roll your own random spot")
+                    ),
+                    Placeholder.unparsed("name", sender.getName()));
         } else {
             sendPrefixedMM(sender, "<red>Failed to find safe spot for <b><name></b>.</red>",
                     Placeholder.unparsed("name", t.getName()));

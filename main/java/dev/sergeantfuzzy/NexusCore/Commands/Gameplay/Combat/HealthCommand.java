@@ -52,8 +52,12 @@ public final class HealthCommand implements CommandExecutor, TabCompleter {
     private void send(CommandSender viewer, Player target) {
         double max = target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         sendPrefixedMM(viewer,
-                "<gray>Health for <b><name></b>:</gray> <green><cur></green>/<max> <gray>HP</gray> " +
-                        choiceBar("/health", "Check your health", "Check health status", "Check others"),
+                "<gray>Health for <b><name></b>:</gray> <green><cur></green>/<max> <gray>HP</gray>" +
+                        actionBar(
+                                runAction("Refresh", "/health status " + target.getName(), "Refresh these stats"),
+                                runAction("Heal", "/heal " + target.getName(), "Top them off"),
+                                suggestAction("Check Other", "/health ", "Type another player name")
+                        ),
                 Placeholder.unparsed("name", target.getName()),
                 Placeholder.unparsed("cur", String.format("%.1f", target.getHealth())),
                 Placeholder.unparsed("max", String.format("%.1f", max)));

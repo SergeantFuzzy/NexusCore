@@ -28,8 +28,12 @@ public final class JumpCommand implements CommandExecutor, TabCompleter {
             if (!sender.hasPermission(PERM_SELF) || !ensurePlayerSender(sender)) return true;
             Player p = (Player) sender;
             if (doJump(p)) {
-                sendPrefixedMM(sender, "<green>Jumped to your crosshair target.</green> " +
-                        choiceBar("/jump", "Jump", "—", "Jump others"));
+                sendPrefixedMM(sender, "<green>Jumped to your crosshair target.</green>" +
+                        actionBar(
+                                runAction("Jump Again", "/jump", "Jump to your current crosshair"),
+                                runAction("Back", "/back", "Return to your previous spot"),
+                                suggestAction("Jump Player", "/jump ", "Type a player to make them jump")
+                        ));
             } else {
                 sendPrefixedMM(sender, "<red>No safe block found in sight.</red>");
             }
@@ -47,7 +51,11 @@ public final class JumpCommand implements CommandExecutor, TabCompleter {
         }
         Player t = opt.get();
         if (doJump(t)) {
-            sendPrefixedMM(sender, "<green>Jumped <b><name></b> to their target block.</green>",
+            sendPrefixedMM(sender, "<green>Jumped <b><name></b> to their target block.</green>" + actionBar(
+                            runAction("Jump Again", "/jump " + t.getName(), "Jump them again"),
+                            runAction("Back", "/back", "Remind them to go back"),
+                            suggestAction("Jump Player", "/jump ", "Type another player")
+                    ),
                     Placeholder.unparsed("name", t.getName()));
         } else {
             sendPrefixedMM(sender, "<red>No safe block for <b><name></b>.</red>",

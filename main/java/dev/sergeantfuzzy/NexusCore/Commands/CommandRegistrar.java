@@ -5,6 +5,7 @@ import dev.sergeantfuzzy.NexusCore.Commands.Admin.Util.CommandHelp;
 import dev.sergeantfuzzy.NexusCore.Commands.Admin.Util.CommandVersion;
 import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Combat.HealCommand;
 import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Combat.HealthCommand;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement.BackCommand;
 import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement.FlyCommand;
 import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement.JumpCommand;
 import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement.RandomTPCommand;
@@ -163,6 +164,18 @@ public final class CommandRegistrar {
                 return List.of();
             });
             EssentialsTabRegistry.register("randomtp", EssentialsTabRegistry.get("rtp"));
+        }
+        {
+            BackCommand exec = new BackCommand(plugin);
+            plugin.getServer().getPluginManager().registerEvents(exec, plugin);
+            register(plugin, "back", "Return to a previous location", List.of(), exec, globalCompleter);
+            EssentialsTabRegistry.register("back", (sender, alias, args) -> {
+                final String PERM_OTHERS = "nexuscore.back.others";
+                if (args.length == 1 && sender.hasPermission(PERM_OTHERS)) {
+                    return matchPrefix(onlinePlayerNames(), args[0]);
+                }
+                return List.of();
+            });
         }
         {
             SpawnCommand exec = new SpawnCommand(plugin);

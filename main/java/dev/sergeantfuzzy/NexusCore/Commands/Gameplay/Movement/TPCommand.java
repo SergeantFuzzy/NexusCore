@@ -15,6 +15,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Util.GameplayCommandUtil.*;
+
 public final class TPCommand implements TabExecutor {
     private static final String PERM_TP_SELF   = "nexuscore.tp";
     private static final String PERM_TP_HERE   = "nexuscore.tphere";
@@ -56,9 +58,19 @@ public final class TPCommand implements TabExecutor {
         if (target == null) return true;
         boolean ok = target.teleport(player.getLocation());
         if (ok) {
-            i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<gray>Teleported </gray><green>" + target.getName() + "</green><gray> to you.</gray>");
+            i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<gray>Teleported </gray><green>" + target.getName() + "</green><gray> to you.</gray>" +
+                    actionBar(
+                            runAction("Back " + target.getName(), "/back " + target.getName(), "Undo their teleport"),
+                            runAction("Visit", "/tp " + target.getName(), "Teleport to them instead"),
+                            suggestAction("Pull Another", "/tphere ", "Type a player to pull")
+                    ));
             if (!target.equals(player)) {
-                i18n.sendMM(target, Msg.CHAT_PREFIX_MM + "<gray>You were teleported to </gray><green>" + player.getName() + "</green><gray>.</gray>");
+                i18n.sendMM(target, Msg.CHAT_PREFIX_MM + "<gray>You were teleported to </gray><green>" + player.getName() + "</green><gray>.</gray>" +
+                        actionBar(
+                                runAction("Back", "/back", "Return to your previous spot"),
+                                runAction("Spawn", "/spawn", "Go to spawn"),
+                                suggestAction("Visit Friend", "/tp ", "Type a friend to visit")
+                        ));
             }
         } else {
             i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<red>Teleport failed.</red>");
@@ -85,9 +97,19 @@ public final class TPCommand implements TabExecutor {
             if (target == null) return true;
             boolean ok = target.teleport(player.getLocation());
             if (ok) {
-                i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<gray>Teleported </gray><green>" + target.getName() + "</green><gray> to you.</gray>");
+                i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<gray>Teleported </gray><green>" + target.getName() + "</green><gray> to you.</gray>" +
+                        actionBar(
+                                runAction("Back " + target.getName(), "/back " + target.getName(), "Undo their teleport"),
+                                runAction("Visit", "/tp " + target.getName(), "Teleport to them"),
+                                suggestAction("Pull Another", "/tphere ", "Type a player to pull")
+                        ));
                 if (!target.equals(player)) {
-                    i18n.sendMM(target, Msg.CHAT_PREFIX_MM + "<gray>You were teleported to </gray><green>" + player.getName() + "</green><gray>.</gray>");
+                    i18n.sendMM(target, Msg.CHAT_PREFIX_MM + "<gray>You were teleported to </gray><green>" + player.getName() + "</green><gray>.</gray>" +
+                            actionBar(
+                                    runAction("Back", "/back", "Return to your previous spot"),
+                                    runAction("Spawn", "/spawn", "Go to spawn"),
+                                    suggestAction("Visit Friend", "/tp ", "Type a friend to visit")
+                            ));
                 }
             } else {
                 i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<red>Teleport failed.</red>");
@@ -112,7 +134,12 @@ public final class TPCommand implements TabExecutor {
             }
             boolean ok = p.teleport(to.getLocation());
             if (ok) {
-                i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<gray>Teleported to </gray><green>" + to.getName() + "</green><gray>.</gray>");
+                i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<gray>Teleported to </gray><green>" + to.getName() + "</green><gray>.</gray>" +
+                        actionBar(
+                                runAction("Back", "/back", "Return to your previous spot"),
+                                runAction("Spawn", "/spawn", "Visit spawn"),
+                                suggestAction("TP Another", "/tp ", "Type another player")
+                        ));
             } else {
                 i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<red>Teleport failed.</red>");
             }
@@ -131,9 +158,19 @@ public final class TPCommand implements TabExecutor {
         }
         boolean ok = a.teleport(b.getLocation());
         if (ok) {
-            i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<gray>Teleported </gray><green>" + a.getName() + "</green><gray> to </gray><green>" + b.getName() + "</green><gray>.</gray>");
+            i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<gray>Teleported </gray><green>" + a.getName() + "</green><gray> to </gray><green>" + b.getName() + "</green><gray>.</gray>" +
+                    actionBar(
+                            runAction("Back " + a.getName(), "/back " + a.getName(), "Undo that teleport"),
+                            runAction("Pull " + a.getName(), "/tphere " + a.getName(), "Bring them to you"),
+                            suggestAction("TP Pair", "/tp ", "Type playerA playerB")
+                    ));
             if (!sender.equals(a)) {
-                i18n.sendMM(a, Msg.CHAT_PREFIX_MM + "<gray>You were teleported to </gray><green>" + b.getName() + "</green><gray>.</gray>");
+                i18n.sendMM(a, Msg.CHAT_PREFIX_MM + "<gray>You were teleported to </gray><green>" + b.getName() + "</green><gray>.</gray>" +
+                        actionBar(
+                                runAction("Back", "/back", "Return to your previous spot"),
+                                runAction("Spawn", "/spawn", "Go to spawn"),
+                                suggestAction("Visit Friend", "/tp ", "Type someone to visit")
+                        ));
             }
         } else {
             i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + "<red>Teleport failed.</red>");

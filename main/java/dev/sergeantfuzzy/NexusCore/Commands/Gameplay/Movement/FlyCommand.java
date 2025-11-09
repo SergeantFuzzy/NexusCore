@@ -47,8 +47,12 @@ public final class FlyCommand implements CommandExecutor, TabCompleter {
             Player p = (Player) sender;
             boolean next = !p.getAllowFlight();
             setFly(p, next);
-            sendPrefixedMM(sender, "<green>Flight <b><state></b> for yourself.</green> " +
-                            choiceBar("/fly", "Toggle fly", "Check fly status", "Toggle others"),
+            sendPrefixedMM(sender, "<green>Flight <b><state></b> for yourself.</green>" +
+                            actionBar(
+                                    runAction("Toggle", "/fly", "Toggle your flight again"),
+                                    runAction("Status", "/fly status", "Check fly status"),
+                                    suggestAction("Toggle Player", "/fly ", "Type a player to toggle")
+                            ),
                     Placeholder.unparsed("state", next ? "enabled" : "disabled"));
             return true;
         }
@@ -59,7 +63,12 @@ public final class FlyCommand implements CommandExecutor, TabCompleter {
                 Player p = (Player) sender;
                 boolean enable = "on".equals(a);
                 setFly(p, enable);
-                sendPrefixedMM(sender, "<green>Flight <b><state></b> for yourself.</green>",
+                sendPrefixedMM(sender, "<green>Flight <b><state></b> for yourself.</green>" +
+                                actionBar(
+                                        runAction("Toggle", "/fly", "Toggle flight again"),
+                                        runAction("Status", "/fly status", "Check fly status"),
+                                        suggestAction("Toggle Player", "/fly ", "Type a player to toggle")
+                                ),
                         Placeholder.unparsed("state", enable ? "enabled" : "disabled"));
                 return true;
             }
@@ -76,10 +85,17 @@ public final class FlyCommand implements CommandExecutor, TabCompleter {
             Player t = opt.get();
             boolean next = !t.getAllowFlight();
             setFly(t, next);
-            sendPrefixedMM(sender, "<green>Flight <b><state></b> for <b><name></b>.</green>",
+            sendPrefixedMM(sender, "<green>Flight <b><state></b> for <b><name></b>.</green>" + actionBar(
+                            runAction("Toggle Again", "/fly " + t.getName(), "Flip their flight again"),
+                            runAction("Status", "/fly status " + t.getName(), "Check their status"),
+                            suggestAction("Toggle Player", "/fly ", "Type a different player")
+                    ),
                     Placeholder.unparsed("state", next ? "enabled" : "disabled"),
                     Placeholder.unparsed("name", t.getName()));
-            sendPrefixedMM(t, "<green>Your flight was <b><state></b> by <b><name></b>.</green>",
+            sendPrefixedMM(t, "<green>Your flight was <b><state></b> by <b><name></b>.</green>" + actionBar(
+                            runAction("Toggle", "/fly", "Toggle your own flight"),
+                            runAction("Back", "/back", "Return to your previous spot")
+                    ),
                     Placeholder.unparsed("state", next ? "enabled" : "disabled"),
                     Placeholder.unparsed("name", sender.getName()));
             return true;
@@ -102,10 +118,17 @@ public final class FlyCommand implements CommandExecutor, TabCompleter {
             }
             Player t = opt.get();
             setFly(t, enable);
-            sendPrefixedMM(sender, "<green>Flight <b><state></b> for <b><name></b>.</green>",
+            sendPrefixedMM(sender, "<green>Flight <b><state></b> for <b><name></b>.</green>" + actionBar(
+                            runAction("Toggle Again", "/fly " + t.getName(), "Flip their flight again"),
+                            runAction("Status", "/fly status " + t.getName(), "Check their status"),
+                            suggestAction("Toggle Player", "/fly ", "Type a different player")
+                    ),
                     Placeholder.unparsed("state", enable ? "enabled" : "disabled"),
                     Placeholder.unparsed("name", t.getName()));
-            sendPrefixedMM(t, "<green>Your flight was <b><state></b> by <b><name></b>.</green>",
+            sendPrefixedMM(t, "<green>Your flight was <b><state></b> by <b><name></b>.</green>" + actionBar(
+                            runAction("Toggle", "/fly", "Toggle your own flight"),
+                            runAction("Back", "/back", "Return to your previous spot")
+                    ),
                     Placeholder.unparsed("state", enable ? "enabled" : "disabled"),
                     Placeholder.unparsed("name", sender.getName()));
             return true;
@@ -118,8 +141,12 @@ public final class FlyCommand implements CommandExecutor, TabCompleter {
     }
     private void sendStatus(CommandSender viewer, Player target) {
         sendPrefixedMM(viewer,
-                "<gray>Fly status for <b><name></b>:</gray> <green><state></green> " +
-                        choiceBar("/fly", "Toggle fly", "Check fly status", "Toggle others"),
+                "<gray>Fly status for <b><name></b>:</gray> <green><state></green>" +
+                        actionBar(
+                                runAction("Toggle " + target.getName(), "/fly " + target.getName(), "Toggle their flight"),
+                                runAction("Status", "/fly status " + target.getName(), "Refresh their status"),
+                                suggestAction("Toggle Player", "/fly ", "Type another player name")
+                        ),
                 Placeholder.unparsed("name", target.getName()),
                 Placeholder.unparsed("state", target.getAllowFlight() ? "ENABLED" : "DISABLED"));
     }

@@ -32,7 +32,11 @@ public final class HealCommand implements CommandExecutor, TabCompleter {
             Player p = (Player) sender;
             heal(p);
             sendPrefixedMM(sender,
-                    "<green>Healed yourself.</green> " + choiceBar("/heal", "Heal yourself", "—", "Heal others"));
+                    "<green>Healed yourself.</green>" + actionBar(
+                            runAction("Heal Again", "/heal", "Instantly heal yourself"),
+                            runAction("Health", "/health status", "Check your health meta"),
+                            suggestAction("Heal Player", "/heal ", "Type a player to heal")
+                    ));
             return true;
         }
         if (!sender.hasPermission(PERM_OTHERS)) {
@@ -47,9 +51,16 @@ public final class HealCommand implements CommandExecutor, TabCompleter {
         }
         Player target = opt.get();
         heal(target);
-        sendPrefixedMM(sender, "<green>Healed <b><name></b>.</green>",
+        sendPrefixedMM(sender, "<green>Healed <b><name></b>.</green>" + actionBar(
+                        runAction("Heal Again", "/heal " + target.getName(), "Top them off once more"),
+                        runAction("Feed", "/feed " + target.getName(), "Feed them after the heal"),
+                        suggestAction("Heal Player", "/heal ", "Type another player")
+                ),
                 Placeholder.unparsed("name", target.getName()));
-        sendPrefixedMM(target, "<green>You were healed by <b><name></b>.</green>",
+        sendPrefixedMM(target, "<green>You were healed by <b><name></b>.</green>" + actionBar(
+                        runAction("Health", "/health status", "Check your health info"),
+                        runAction("Back", "/back", "Return to your previous spot")
+                ),
                 Placeholder.unparsed("name", sender.getName()));
         return true;
     }

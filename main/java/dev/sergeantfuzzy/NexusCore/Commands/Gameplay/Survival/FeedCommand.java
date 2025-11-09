@@ -58,7 +58,11 @@ public final class FeedCommand implements CommandExecutor, TabCompleter {
             Player p = (Player) sender;
             feed(p);
             sendPrefixedMM(sender,
-                    "<green>Fed yourself.</green> " + choiceBar("/feed", "Feed yourself", "Check feed status", "Feed others"));
+                    "<green>Fed yourself.</green>" + actionBar(
+                            runAction("Feed Again", "/feed", "Refill your hunger"),
+                            runAction("Status", "/feed status", "Check your saturation"),
+                            suggestAction("Feed Player", "/feed ", "Type a player name to feed them")
+                    ));
             return true;
         }
         if (!sender.hasPermission(PERM_OTHERS)) {
@@ -73,9 +77,16 @@ public final class FeedCommand implements CommandExecutor, TabCompleter {
         }
         Player target = opt.get();
         feed(target);
-        sendPrefixedMM(sender, "<green>Fed <b><name></b>.</green>",
+        sendPrefixedMM(sender, "<green>Fed <b><name></b>.</green>" + actionBar(
+                        runAction("Feed Again", "/feed " + target.getName(), "Refill them once more"),
+                        runAction("Status", "/feed status " + target.getName(), "Check their hunger"),
+                        suggestAction("Feed Player", "/feed ", "Type another player")
+                ),
                 Placeholder.unparsed("name", target.getName()));
-        sendPrefixedMM(target, "<green>You were fed by <b><name></b>.</green>",
+        sendPrefixedMM(target, "<green>You were fed by <b><name></b>.</green>" + actionBar(
+                        runAction("Status", "/feed status", "Check your hunger info"),
+                        runAction("Back", "/back", "Return to your last location")
+                ),
                 Placeholder.unparsed("name", sender.getName()));
         return true;
     }
@@ -86,8 +97,12 @@ public final class FeedCommand implements CommandExecutor, TabCompleter {
     }
     private void sendStatus(CommandSender viewer, Player target) {
         sendPrefixedMM(viewer,
-                "<gray>Feed status for <b><name></b>:</gray> <green>Food:</green> <b><food></b>/<max> <gray>|</gray> <green>Saturation:</green> <b><sat></b> " +
-                        choiceBar("/feed", "Feed yourself", "Check feed status", "Feed others"),
+                "<gray>Feed status for <b><name></b>:</gray> <green>Food:</green> <b><food></b>/<max> <gray>|</gray> <green>Saturation:</green> <b><sat></b>" +
+                        actionBar(
+                                runAction("Feed " + target.getName(), "/feed " + target.getName(), "Top them off instantly"),
+                                runAction("Status", "/feed status " + target.getName(), "Refresh their stats"),
+                                suggestAction("Feed Player", "/feed ", "Type another player")
+                        ),
                 Placeholder.unparsed("name", target.getName()),
                 Placeholder.unparsed("food", String.valueOf(target.getFoodLevel())),
                 Placeholder.unparsed("max", "20"),

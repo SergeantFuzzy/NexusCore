@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -42,16 +44,63 @@ public final class GameplayCommandUtil {
         }
         return Optional.empty();
     }
+    private static final String THEME_GRADIENT = "<gradient:#3498DB:#9B59B6>";
+    private static final String SEPARATOR = " <dark_gray>•</dark_gray> ";
+    public enum ClickType { RUN, SUGGEST }
+    public record CommandAction(String label, String command, ClickType click, String hover) {}
+    public static CommandAction runAction(String label, String command, String hover) {
+        return new CommandAction(label, command, ClickType.RUN, hover);
+    }
+    public static CommandAction suggestAction(String label, String command, String hover) {
+        return new CommandAction(label, command, ClickType.SUGGEST, hover);
+    }
+    public static String actionBar(CommandAction... actions) {
+        if (actions == null || actions.length == 0) return "";
+        List<String> parts = new ArrayList<>();
+        for (CommandAction action : actions) {
+            String rendered = renderAction(action);
+            if (!rendered.isEmpty()) parts.add(rendered);
+        }
+        if (parts.isEmpty()) return "";
+        return " <dark_gray>|</dark_gray> " + String.join(SEPARATOR, parts);
+    }
+    private static String renderAction(CommandAction action) {
+        if (action == null) return "";
+        String command = sanitize(action.command());
+        if (command.isEmpty()) return "";
+        String label = sanitize(action.label());
+        if (label.isEmpty()) label = "Run";
+        ClickType click = (action.click() == null) ? ClickType.RUN : action.click();
+        String hover = sanitizeHover(action.hover(), click);
+        String clickType = click == ClickType.SUGGEST ? "suggest_command" : "run_command";
+        return "<click:" + clickType + ":'" + command + "'>"
+                + "<hover:show_text:'" + hover + "'>"
+                + THEME_GRADIENT + "<bold>[" + label + "]</bold></gradient>"
+                + "</hover></click>";
+    }
+    private static String sanitize(String in) {
+        if (in == null) return "";
+        return in.replace("'", "").trim();
+    }
+    private static String sanitizeHover(String hover, ClickType clickType) {
+        String fallback = switch (clickType) {
+            case SUGGEST -> "<gray>Click to pre-fill this command.</gray>";
+            case RUN -> "<gray>Click to run this command.</gray>";
+        };
+        String raw = (hover == null || hover.isEmpty()) ? fallback : hover;
+        String cleaned = raw.replace("'", "");
+        if (cleaned.startsWith("<")) return cleaned;
+        return "<gray>" + cleaned + "</gray>";
+    }
+    /**
+     * @deprecated Retained for older call-sites. Prefer {@link #actionBar(CommandAction...)}.
+     */
+    @Deprecated(forRemoval = true)
     public static String choiceBar(String runCommand, String... hints) {
         if (runCommand == null || runCommand.isEmpty()) return "";
         String hover = (hints != null && hints.length > 0 && hints[0] != null && !hints[0].isEmpty())
                 ? hints[0]
                 : "Click to run";
-        hover = hover.replace("'", "");
-        return " <dark_gray>|</dark_gray> "
-                + "<click:run_command:'" + runCommand + "'>"
-                + "<hover:show_text:'<green>" + hover + "</green>'>"
-                + "<green>[Click to Run]</green>"
-                + "</hover></click>";
+        return actionBar(runAction("Run", runCommand, "<green>" + hover + "</green>"));
     }
 }

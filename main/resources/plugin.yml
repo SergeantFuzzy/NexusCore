@@ -47,6 +47,10 @@ commands:
     usage: /tp [player]
     aliases: teleport
     permission: nexuscore.tp
+  back:
+    description: Return to your previous location.
+    usage: /back [player]
+    permission: nexuscore.back
 
 permissions:
   nexuscore.*:
@@ -73,6 +77,8 @@ permissions:
       nexuscore.randomtp.others: true
       nexuscore.spawn.player: true
       nexuscore.tp.other: true
+      nexuscore.back: true
+      nexuscore.back.others: true
   nexuscore.admin.reload:
     description: Allows use of /nexusreload.
     default: op
@@ -103,6 +109,8 @@ permissions:
     default: true
   nexuscore.tphere:
     default: true
+  nexuscore.back:
+    default: true
 
   # Others (admin) sub-perms
   nexuscore.feed.others:
@@ -120,4 +128,6 @@ permissions:
   nexuscore.spawn.player:
     default: op
   nexuscore.tp.other:
+    default: op
+  nexuscore.back.others:
     default: op
