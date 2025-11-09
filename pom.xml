@@ -6,7 +6,7 @@
 
     <groupId>dev.sergeantfuzzy</groupId>
     <artifactId>NexusCore</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.2-BETA</version>
     <packaging>jar</packaging>
 
     <name>NexusCore</name>
