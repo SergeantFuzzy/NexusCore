@@ -1,0 +1,10 @@
+# Build output
+/target/
+/out/
+
+# IDE files
+/.idea/
+/*.iml
+
+# OS clutter
+.DS_Store

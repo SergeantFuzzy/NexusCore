@@ -1,4 +1,4 @@
-package dev.sergeantfuzzy.NexusCore.Commands.Essentials;
+package dev.sergeantfuzzy.NexusCore.Commands.Gameplay.World;
 
 import dev.sergeantfuzzy.NexusCore.Utilities.Msg;
 import dev.sergeantfuzzy.NexusCore.Utilities.i18n;

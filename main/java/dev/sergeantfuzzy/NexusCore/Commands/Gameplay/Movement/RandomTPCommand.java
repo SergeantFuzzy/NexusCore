@@ -1,4 +1,4 @@
-package dev.sergeantfuzzy.NexusCore.Commands.Essentials;
+package dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement;
 
 import dev.sergeantfuzzy.NexusCore.Utilities.Msg;
 import dev.sergeantfuzzy.NexusCore.Utilities.i18n;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static dev.sergeantfuzzy.NexusCore.Commands.Essentials.EssentialsUtil.*;
+import static dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Util.GameplayCommandUtil.*;
 
 public final class RandomTPCommand implements CommandExecutor, TabCompleter {
     private static final String PERM_SELF   = "nexuscore.rtp";

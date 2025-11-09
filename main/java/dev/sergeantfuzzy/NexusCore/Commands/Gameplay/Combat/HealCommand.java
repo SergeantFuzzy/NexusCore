@@ -1,4 +1,4 @@
-package dev.sergeantfuzzy.NexusCore.Commands.Essentials;
+package dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Combat;
 
 import dev.sergeantfuzzy.NexusCore.Utilities.Msg;
 import dev.sergeantfuzzy.NexusCore.Utilities.i18n;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static dev.sergeantfuzzy.NexusCore.Commands.Essentials.EssentialsUtil.*;
+import static dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Util.GameplayCommandUtil.*;
 
 public final class HealCommand implements CommandExecutor, TabCompleter {
     private static final String PERM_SELF   = "nexuscore.heal";
@@ -54,7 +54,7 @@ public final class HealCommand implements CommandExecutor, TabCompleter {
         return true;
     }
     private void heal(Player p) {
-        double max = p.getAttribute(Attribute.MAX_HEALTH).getValue();
+        double max = p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         p.setHealth(Math.min(max, max));
         p.setFireTicks(0);
         p.setFoodLevel(20);

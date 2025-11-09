@@ -1,4 +1,4 @@
-package dev.sergeantfuzzy.NexusCore.Commands.Essentials;
+package dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Util;
 
 import dev.sergeantfuzzy.NexusCore.Utilities.Msg;
 import dev.sergeantfuzzy.NexusCore.Utilities.i18n;
@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 import java.util.Locale;
 import java.util.Optional;
 
-public final class EssentialsUtil {
-    private EssentialsUtil() {}
+public final class GameplayCommandUtil {
+    private GameplayCommandUtil() {}
     public static void sendPrefixedMM(CommandSender sender, String body) {
         i18n.sendMM(sender, Msg.CHAT_PREFIX_MM + body);
     }

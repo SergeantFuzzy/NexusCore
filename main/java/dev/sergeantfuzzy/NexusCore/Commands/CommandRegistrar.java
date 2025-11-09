@@ -3,7 +3,14 @@ package dev.sergeantfuzzy.NexusCore.Commands;
 import dev.sergeantfuzzy.NexusCore.Commands.Admin.AdminCommandReload;
 import dev.sergeantfuzzy.NexusCore.Commands.Admin.Util.CommandHelp;
 import dev.sergeantfuzzy.NexusCore.Commands.Admin.Util.CommandVersion;
-import dev.sergeantfuzzy.NexusCore.Commands.Essentials.*;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Combat.HealCommand;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Combat.HealthCommand;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement.FlyCommand;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement.JumpCommand;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement.RandomTPCommand;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Movement.TPCommand;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Survival.FeedCommand;
+import dev.sergeantfuzzy.NexusCore.Commands.Gameplay.World.SpawnCommand;
 import dev.sergeantfuzzy.NexusCore.Listeners.Commands.HelpOverrideListener;
 
 import org.bukkit.Bukkit;

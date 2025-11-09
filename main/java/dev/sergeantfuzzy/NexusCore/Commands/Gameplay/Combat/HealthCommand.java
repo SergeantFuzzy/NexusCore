@@ -1,4 +1,4 @@
-package dev.sergeantfuzzy.NexusCore.Commands.Essentials;
+package dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Combat;
 
 import dev.sergeantfuzzy.NexusCore.Utilities.Msg;
 import dev.sergeantfuzzy.NexusCore.Utilities.i18n;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static dev.sergeantfuzzy.NexusCore.Commands.Essentials.EssentialsUtil.*;
+import static dev.sergeantfuzzy.NexusCore.Commands.Gameplay.Util.GameplayCommandUtil.*;
 
 public final class HealthCommand implements CommandExecutor, TabCompleter {
     private static final String PERM_SELF   = "nexuscore.health";
@@ -50,7 +50,7 @@ public final class HealthCommand implements CommandExecutor, TabCompleter {
         return true;
     }
     private void send(CommandSender viewer, Player target) {
-        double max = target.getAttribute(Attribute.MAX_HEALTH).getValue();
+        double max = target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         sendPrefixedMM(viewer,
                 "<gray>Health for <b><name></b>:</gray> <green><cur></green>/<max> <gray>HP</gray> " +
                         choiceBar("/health", "Check your health", "Check health status", "Check others"),
