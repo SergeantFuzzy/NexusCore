@@ -95,5 +95,5 @@ Prepared for modern Paper/Spigot servers running (1.20+).
 
 ## License
 
-This project is provided under the terms outlined in the [LICENSE](./LICENSE) file.  
+This project is provided under the terms outlined in the [LICENSE](./LICENSE.txt) file.  
 © 2025 **NexusCore** by Sergeant Fuzzy — all rights reserved.
